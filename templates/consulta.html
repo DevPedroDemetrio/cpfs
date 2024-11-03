@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+    
+{% block conteudo %}
+{% if resposta == "usuario não encontrado" or resposta == "Cpf invalido, por favor insira apenas numeros"%}
+    <h3>{{resposta}}</h3>
+{% else %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Protestos</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{resposta['nome']}}</td>
+                <td>{{resposta['cpf']}}</td>
+                <td>{{ resposta['protestos']  }}</td>
+                <td>
+                    {% if 'provedora' in resposta['protestos'] %}
+                        <div class="rounded-circle" style="background-color: rgb(248, 11, 11); width: 20px; height: 20px;"></div>
+                    {% elif resposta['protestos'] %}
+                        <div class="rounded-circle" style="background-color: rgb(255, 238, 0); width: 20px; height: 20px;"></div>
+                    {% else %}
+                        <div class="rounded-circle" style="background-color: rgb(60, 134, 76); width: 20px; height: 20px;"></div>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
